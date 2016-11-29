@@ -23,12 +23,13 @@ public class PlayersPage extends Page {
         webDriver.findElement(By.xpath(INSERT_LINK_XPATH_PLAYERS_PAGE)).click();
     }
 
-    public void searchPlayerByUserName(String userName) {
-        webDriver.findElement(By.xpath(LOGIN_INPUT_XPATH_PLAYERS_PAGE)).sendKeys(userName);
+    public void searchPlayerByEmail(String email) {
+        webDriver.findElement(By.xpath(EMAIL_INPUT_XPATH_PLAYERS_PAGE)).clear();
+        webDriver.findElement(By.xpath(EMAIL_INPUT_XPATH_PLAYERS_PAGE)).sendKeys(email);
         webDriver.findElement(By.xpath(SEARCH_BUTTON_INPUT_XPATH_PLAYERS_PAGE)).click();
     }
 
-    public void openEditPlayerPage() {
-        webDriver.findElement(By.xpath(EDIT_LINK_XPATH_PLAYERS_PAGE)).click();
+        public void openEditPlayerPage(String email) {
+        webDriver.findElement(By.xpath(EDIT_LINK_XPATH_PLAYERS_PAGE.replaceFirst("email", email))).click();
     }
 }

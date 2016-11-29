@@ -22,12 +22,13 @@ public class Util {
 
     public static void assertPokerPlayers(PokerPlayer actual, WebDriver webDriver, String messageErr) {
         PokerPlayer expected = new PokerPlayer();
-        expected.setEmail(webDriver.findElement(By.xpath(EMAIL_INPUT_XPATH_INSERT_EDIT_PAGE)).getText(), "@gmail.com");
-        expected.setFirstName(webDriver.findElement(By.xpath(FIRST_NAME_INPUT_XPATH_INSERT_EDIT_PAGE)).getText());
-        expected.setLastName(webDriver.findElement(By.xpath(LAST_NAME_INPUT_XPATH_INSERT_EDIT_PAGE)).getText());
-        expected.setCity(webDriver.findElement(By.xpath(CITY_INPUT_XPATH_INSERT_EDIT_PAGE)).getText());
-        expected.setAddress(webDriver.findElement(By.xpath(ADDRESS_TEXTAREA_XPATH_INSERT_EDIT_PAGE)).getText());
-        expected.setPhone(webDriver.findElement(By.xpath(PHONE_INPUT_XPATH_INSERT_EDIT_PAGE)).getText());
+        expected.setEmail(webDriver.findElement(By.xpath(EMAIL_INPUT_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"), "");
+        expected.setFirstName(webDriver.findElement(By.xpath(FIRST_NAME_INPUT_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"));
+        expected.setLastName(webDriver.findElement(By.xpath(LAST_NAME_INPUT_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"));
+        expected.setCity(webDriver.findElement(By.xpath(CITY_INPUT_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"));
+        expected.setCountry(webDriver.findElement(By.xpath(COUNTRY_SELCT_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"));
+        expected.setAddress(webDriver.findElement(By.xpath(ADDRESS_TEXTAREA_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"));
+        expected.setPhone(webDriver.findElement(By.xpath(PHONE_INPUT_XPATH_INSERT_EDIT_PAGE)).getAttribute("value"));
 
         if (!expected.equals(actual)) {
             throw new InapropriatePokerPlayerException(messageErr);
@@ -35,17 +36,17 @@ public class Util {
     }
 
 
-    public static PokerPlayer createPlayer(){
+    public static PokerPlayer createPlayer(String domen, String firstName, String lastName, String country, String city, String address, String phone){
         PokerPlayer pokerPlayer = new PokerPlayer();
         pokerPlayer.setUserName(new StringBuilder(RandomStringUtils.randomAlphabetic(9)).append(new StrBuilder(RandomStringUtils.randomNumeric(3))).toString());
         pokerPlayer.setPassword(RandomStringUtils.randomNumeric(6));
-        pokerPlayer.setEmail(pokerPlayer.getUserName(), "@gmail.com");
-        pokerPlayer.setFirstName("FirstName");
-        pokerPlayer.setLastName("LastName");
-        pokerPlayer.setCountry("UK");
-        pokerPlayer.setCity("Kharkov");
-        pokerPlayer.setAddress("Address");
-        pokerPlayer.setPhone("+1234567890");
+        pokerPlayer.setEmail(pokerPlayer.getUserName(), domen);
+        pokerPlayer.setFirstName(firstName);
+        pokerPlayer.setLastName(lastName);
+        pokerPlayer.setCountry(country);
+        pokerPlayer.setCity(city);
+        pokerPlayer.setAddress(address);
+        pokerPlayer.setPhone(phone);
         return pokerPlayer;
     }
 }
